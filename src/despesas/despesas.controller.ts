@@ -47,7 +47,7 @@ export class DespesasController {
   }
 
   @Get('/creditos')
-  async listarEntradas(): Promise<Despesa[]> {
+  async listarCreditos(): Promise<Despesa[]> {
     return await this.despesasService.listarCreditos();
   }
   @Get('/debitos/mes/:month')
