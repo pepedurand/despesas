@@ -1,40 +1,28 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CriarAtualizarDespesaDto } from './dtos/criar-atualizar-despesa.dto';
 import { Despesa } from './interfaces/despesa.interface';
-import { v4 as uuidv4 } from 'uuid';
-import { tipoDespesa } from './types/tipoDespesa';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class DespesasService {
-  private despesas: Despesa[] = [
-    {
-      _id: '2',
-      dataDespesa: new Date(),
-      description: 'debito',
-      type: tipoDespesa.CREDIT,
-      user_id: '1',
-      value: 20,
-    },
-  ];
+  constructor(
+    @InjectModel('despesas') private readonly despesaModel: Model<Despesa>,
+  ) {}
 
-  private readonly logger = new Logger(DespesasService.name);
-
-  async criarDespesa(criarDespesaDto: CriarAtualizarDespesaDto) {
-    const despesa: Despesa = {
-      _id: uuidv4(),
-      dataDespesa: new Date(),
-      description: criarDespesaDto.description,
-      type: criarDespesaDto.type,
-      user_id: '1',
-      value: criarDespesaDto.value,
-    };
-    await this.despesas.push(despesa);
-    return this.despesas;
+  async criarDespesa(
+    criarDespesaDto: CriarAtualizarDespesaDto,
+  ): Promise<Despesa> {
+    const despesaAdicionada = new this.despesaModel(criarDespesaDto);
+    return await despesaAdicionada.save();
   }
 
-  //   async atualizarDespesa()
-
   async consultarDespesas(): Promise<Despesa[]> {
-    return this.despesas;
+    return await this.despesaModel.find();
+  }
+
+  async deletarDespesa(_id: string): Promise<Despesa[]> {
+    const despesaEncontrada = this.despesaModel.findOne({ _id });
+    return await this.despesaModel.remove(despesaEncontrada);
   }
 }
