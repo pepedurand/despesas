@@ -1,5 +1,5 @@
 import { tipoDespesa } from '../types/tipoDespesa';
-import { IsDate, IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsDateString, IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
 export class CriarAtualizarDespesaDto {
   @IsNotEmpty()
   description: string;
@@ -9,6 +9,6 @@ export class CriarAtualizarDespesaDto {
   @IsEnum(tipoDespesa)
   @IsNotEmpty()
   type: tipoDespesa;
-  @IsDate()
+  @IsDateString()
   dataDespesa: Date;
 }

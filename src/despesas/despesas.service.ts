@@ -18,11 +18,20 @@ export class DespesasService {
   }
 
   async consultarDespesas(): Promise<Despesa[]> {
-    return await this.despesaModel.find();
+    return await this.despesaModel.find().sort({ dataDespesa: 1 });
   }
 
   async deletarDespesa(_id: string): Promise<Despesa[]> {
     const despesaEncontrada = this.despesaModel.findOne({ _id });
     return await this.despesaModel.remove(despesaEncontrada);
+  }
+
+  async listarDespesasDoMes(month: number): Promise<Despesa[]> {
+    const despesasDoMes = this.despesaModel
+      .find({
+        $expr: { $eq: [{ $month: '$dataDespesa' }, month] },
+      })
+      .sort({ dataDespesa: 1 });
+    return despesasDoMes;
   }
 }

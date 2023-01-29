@@ -27,6 +27,12 @@ export class DespesasController {
   async consultarDespesas(): Promise<Despesa[]> {
     return await this.despesasService.consultarDespesas();
   }
+  @Get('/:month')
+  async listarDespesasDoMes(
+    @Param('month', DespesasValidacaoPipe) month: number,
+  ): Promise<Despesa[]> {
+    return await this.despesasService.listarDespesasDoMes(month);
+  }
 
   @Delete('/:_id')
   async deletarDespesa(
