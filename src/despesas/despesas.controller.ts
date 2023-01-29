@@ -27,11 +27,34 @@ export class DespesasController {
   async consultarDespesas(): Promise<Despesa[]> {
     return await this.despesasService.consultarDespesas();
   }
-  @Get('/:month')
+  @Get('/mes/:month')
   async listarDespesasDoMes(
     @Param('month', DespesasValidacaoPipe) month: number,
   ): Promise<Despesa[]> {
     return await this.despesasService.listarDespesasDoMes(month);
+  }
+
+  @Get('/debitos')
+  async listarDebitos(): Promise<Despesa[]> {
+    return await this.despesasService.listarDebitos();
+  }
+
+  @Get('/debitos/mes/:month')
+  async listarDebitosDoMes(
+    @Param('month', DespesasValidacaoPipe) month: number,
+  ): Promise<Despesa[]> {
+    return await this.despesasService.listarDebitosDoMes(month);
+  }
+
+  @Get('/creditos')
+  async listarEntradas(): Promise<Despesa[]> {
+    return await this.despesasService.listarCreditos();
+  }
+  @Get('/debitos/mes/:month')
+  async listarCreditosDoMes(
+    @Param('month', DespesasValidacaoPipe) month: number,
+  ): Promise<Despesa[]> {
+    return await this.despesasService.listarCreditosDoMes(month);
   }
 
   @Delete('/:_id')
