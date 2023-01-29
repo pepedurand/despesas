@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { CriarAtualizarDespesaDto } from './dtos/criar-atualizar-despesa.dto';
 import { Despesa } from './interfaces/despesa.interface';
 import { v4 as uuidv4 } from 'uuid';
+import { tipoDespesa } from './types/tipoDespesa';
 
 @Injectable()
 export class DespesasService {
@@ -10,9 +11,9 @@ export class DespesasService {
       _id: '2',
       dataDespesa: new Date(),
       description: 'debito',
-      type: 'credit',
+      type: tipoDespesa.CREDIT,
       user_id: '1',
-      value: '20',
+      value: 20,
     },
   ];
 
