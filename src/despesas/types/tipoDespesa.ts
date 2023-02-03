@@ -1,4 +1,4 @@
 export enum tipoDespesa {
-  CREDIT = 'credit',
-  EXPENSE = 'expense',
+  CREDIT = 'Despesa',
+  EXPENSE = 'Ganho',
 }
