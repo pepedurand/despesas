@@ -30,7 +30,7 @@ export class DespesasController {
   @Get('/mes/:month/:year')
   async listarDespesasDoMes(
     @Param('month', DespesasValidacaoPipe) month: number,
-    @Param('month', DespesasValidacaoPipe) year: number,
+    @Param('year', DespesasValidacaoPipe) year: number,
   ): Promise<Despesa[]> {
     return await this.despesasService.listarDespesasDoMes(month, year);
   }
