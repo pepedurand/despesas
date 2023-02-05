@@ -50,7 +50,7 @@ export class DespesasController {
   async listarCreditos(): Promise<Despesa[]> {
     return await this.despesasService.listarCreditos();
   }
-  @Get('/debitos/mes/:month')
+  @Get('/debitos/:month')
   async listarCreditosDoMes(
     @Param('month', DespesasValidacaoPipe) month: number,
   ): Promise<Despesa[]> {
