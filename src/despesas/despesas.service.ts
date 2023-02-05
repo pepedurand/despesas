@@ -27,10 +27,13 @@ export class DespesasService {
     return await this.despesaModel.remove(despesaEncontrada);
   }
 
-  async listarDespesasDoMes(month: number): Promise<Despesa[]> {
+  async listarDespesasDoMes(month: number, year: number): Promise<Despesa[]> {
     const despesasDoMes = this.despesaModel
       .find({
-        $expr: { $eq: [{ $month: '$dataDespesa' }, month] },
+        $and: [
+          { $expr: { $eq: [{ $month: '$dataDespesa' }, month] } },
+          { $expr: { $eq: [{ $year: '$dataDespesa' }, year] } },
+        ],
       })
       .sort({ dataDespesa: 1 });
     return despesasDoMes;
@@ -45,11 +48,14 @@ export class DespesasService {
     return debitos;
   }
 
-  async listarDebitosDoMes(month: number): Promise<Despesa[]> {
+  async listarDebitosDoMes(month: number, year: number): Promise<Despesa[]> {
     const despesasDoMes = this.despesaModel
       .find({
         type: tipoDespesa.EXPENSE,
-        $expr: { $eq: [{ $month: '$dataDespesa' }, month] },
+        $and: [
+          { $expr: { $eq: [{ $month: '$dataDespesa' }, month] } },
+          { $expr: { $eq: [{ $year: '$dataDespesa' }, year] } },
+        ],
       })
       .sort({ dataDespesa: 1 });
     return despesasDoMes;
@@ -64,11 +70,14 @@ export class DespesasService {
     return creditos;
   }
 
-  async listarCreditosDoMes(month: number): Promise<Despesa[]> {
+  async listarCreditosDoMes(month: number, year: number): Promise<Despesa[]> {
     const creditosDoMes = this.despesaModel
       .find({
         type: tipoDespesa.CREDIT,
-        $expr: { $eq: [{ $month: '$dataDespesa' }, month] },
+        $and: [
+          { $expr: { $eq: [{ $month: '$dataDespesa' }, month] } },
+          { $expr: { $eq: [{ $year: '$dataDespesa' }, year] } },
+        ],
       })
       .sort({ dataDespesa: 1 });
     return creditosDoMes;

@@ -27,11 +27,12 @@ export class DespesasController {
   async consultarDespesas(): Promise<Despesa[]> {
     return await this.despesasService.consultarDespesas();
   }
-  @Get('/mes/:month')
+  @Get('/mes/:month/:year')
   async listarDespesasDoMes(
     @Param('month', DespesasValidacaoPipe) month: number,
+    @Param('month', DespesasValidacaoPipe) year: number,
   ): Promise<Despesa[]> {
-    return await this.despesasService.listarDespesasDoMes(month);
+    return await this.despesasService.listarDespesasDoMes(month, year);
   }
 
   @Get('/debitos')
@@ -39,11 +40,12 @@ export class DespesasController {
     return await this.despesasService.listarDebitos();
   }
 
-  @Get('/debitos/:month')
+  @Get('/debitos/:month/:year')
   async listarDebitosDoMes(
     @Param('month', DespesasValidacaoPipe) month: number,
+    @Param('year', DespesasValidacaoPipe) year: number,
   ): Promise<Despesa[]> {
-    return await this.despesasService.listarDebitosDoMes(month);
+    return await this.despesasService.listarDebitosDoMes(month, year);
   }
 
   @Get('/creditos')
@@ -51,11 +53,12 @@ export class DespesasController {
     return await this.despesasService.listarCreditos();
   }
 
-  @Get('/creditos/:month')
+  @Get('/creditos/:month/:year')
   async listarCreditosDoMes(
     @Param('month', DespesasValidacaoPipe) month: number,
+    @Param('year', DespesasValidacaoPipe) year: number,
   ): Promise<Despesa[]> {
-    return await this.despesasService.listarCreditosDoMes(month);
+    return await this.despesasService.listarCreditosDoMes(month, year);
   }
 
   @Delete('/:_id')
