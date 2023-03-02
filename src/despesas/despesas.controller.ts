@@ -11,7 +11,7 @@ import {
 import { DespesasService } from './despesas.service';
 import { CriarAtualizarDespesaDto } from './dtos/criar-atualizar-despesa.dto';
 import { Despesa } from './interfaces/despesa.interface';
-import { DespesasValidacaoPipe } from './pipes/despesas-validacao.pipe';
+import { DespesasValidacaoPipe } from '../shared/pipes/despesas-validacao.pipe';
 
 @Controller('despesas')
 export class DespesasController {
